@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ .Subject }}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      color: #333;
+    }
+    .card {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .footer {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>{{ .Subject }}</h2>
+    <p>{{ .Body }}</p>
+
+    <div class="footer">
+      Temple Management System<br>
+      Powered by EZEU™
+    </div>
+  </div>
+</body>
+</html>

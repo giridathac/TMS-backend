@@ -1,0 +1,169 @@
+basePath: /api/v1
+definitions:
+  auth.RegisterRequest:
+    properties:
+      email:
+        example: sharath@example.com
+        type: string
+      fullName:
+        example: Sharath Kumar
+        type: string
+      password:
+        example: secret123
+        minLength: 6
+        type: string
+      role:
+        example: templeadmin
+        type: string
+    required:
+    - email
+    - fullName
+    - password
+    - role
+    type: object
+  auth.loginReq:
+    properties:
+      email:
+        example: sharath@example.com
+        type: string
+      password:
+        example: secret123
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  auth.refreshReq:
+    properties:
+      refreshToken:
+        example: your_refresh_token_here
+        type: string
+    required:
+    - refreshToken
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@templemgmt.com
+    name: Temple Management Support
+    url: http://localhost:5173
+  description: API Documentation for Temple Management SaaS Platform
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://localhost:5173/terms
+  title: Temple Management API
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Login payload
+        in: body
+        name: loginReq
+        required: true
+        schema:
+          $ref: '#/definitions/auth.loginReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Login and get tokens
+      tags:
+      - Auth
+  /auth/refresh:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Refresh payload
+        in: body
+        name: refreshReq
+        required: true
+        schema:
+          $ref: '#/definitions/auth.refreshReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Refresh access token
+      tags:
+      - Auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user with email and password
+      parameters:
+      - description: User details
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/auth.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Register a new user
+      tags:
+      - Auth
+swagger: "2.0"
