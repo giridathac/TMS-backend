@@ -37,8 +37,9 @@ services:
       POSTGRES_DB: temple_db
       POSTGRES_USER: temple_user
       POSTGRES_PASSWORD: nature123
+      PGPORT: 9432
     ports:
-      - "5432:5432"
+      - "9432:9432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
